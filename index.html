@@ -3,7 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Wishcraft Designs ✨</title>
+
+<title>SurpriseHub — Create a Special Moment</title>
+
+<meta name="description"
+content="Create a beautiful interactive surprise with music, cake, balloons, photos, personal messages, videos and celebration.">
 
 <style>
 *{
@@ -15,376 +19,72 @@
 html,body{
     width:100%;
     min-height:100%;
+    font-family:Arial, Helvetica, sans-serif;
+    overflow:hidden;
 }
 
 body{
-    font-family:Georgia, "Times New Roman", serif;
-    overflow:hidden;
-    color:#3b2942;
     background:
-        radial-gradient(circle at 15% 15%,#ffe1ef 0,transparent 28%),
-        radial-gradient(circle at 85% 20%,#e7dcff 0,transparent 30%),
-        linear-gradient(135deg,#fff9fc,#f8f3ff,#f2faff);
+        radial-gradient(circle at top,#fff1fa 0%,#f8eaff 35%,#e7d8ff 100%);
+    color:#35164f;
 }
 
-/* Floating decorations */
-
-.decor{
-    position:fixed;
-    z-index:1;
-    pointer-events:none;
-    font-size:clamp(20px,5vw,38px);
-    animation:float 5s ease-in-out infinite;
-    opacity:.65;
+button,
+input,
+textarea{
+    font:inherit;
 }
 
-.d1{left:5%;top:12%;}
-.d2{right:7%;top:18%;animation-delay:1s;}
-.d3{left:8%;bottom:15%;animation-delay:2s;}
-.d4{right:6%;bottom:12%;animation-delay:3s;}
-.d5{left:48%;top:7%;animation-delay:1.5s;}
-
-@keyframes float{
-    0%,100%{transform:translateY(0) rotate(-5deg);}
-    50%{transform:translateY(-18px) rotate(8deg);}
+button{
+    border:none;
+    cursor:pointer;
 }
 
-/* Main flow */
-
-.flow{
-    position:relative;
+.app{
     width:100%;
     height:100vh;
-    min-height:600px;
-    z-index:2;
+    position:relative;
+    overflow:hidden;
 }
+
+/* ---------------- MUSIC ---------------- */
+
+.music-control{
+    position:fixed;
+    top:18px;
+    right:18px;
+    z-index:1000;
+    width:48px;
+    height:48px;
+    border-radius:50%;
+    background:rgba(255,255,255,.85);
+    box-shadow:0 8px 25px rgba(80,30,100,.15);
+    font-size:21px;
+    display:none;
+}
+
+/* ---------------- SCREENS ---------------- */
 
 .screen{
     position:absolute;
     inset:0;
-    width:100%;
-    min-height:100vh;
-    padding:25px 18px;
-    display:flex;
-    justify-content:center;
+    display:none;
     align-items:center;
+    justify-content:center;
     text-align:center;
-
-    opacity:0;
-    visibility:hidden;
-    transform:translateX(100px) scale(.96);
-
-    transition:
-        opacity .7s ease,
-        transform .7s ease,
-        visibility .7s;
+    padding:25px;
+    overflow:auto;
 }
 
 .screen.active{
-    opacity:1;
-    visibility:visible;
-    transform:translateX(0) scale(1);
-}
-
-.screen.previous{
-    opacity:0;
-    visibility:hidden;
-    transform:translateX(-100px) scale(.96);
-}
-
-.content{
-    width:100%;
-    max-width:650px;
-}
-
-/* Logo */
-
-.logo{
-    font-family:Arial,sans-serif;
-    font-size:clamp(2.8rem,12vw,6rem);
-    font-weight:900;
-    background:linear-gradient(
-        90deg,
-        #ec4899,
-        #a855f7,
-        #6366f1
-    );
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
-    filter:drop-shadow(0 8px 20px rgba(139,92,246,.15));
-}
-
-.subtitle{
-    margin-top:15px;
-    color:#786a80;
-    font-size:clamp(1rem,4vw,1.25rem);
-    line-height:1.6;
-}
-
-.small{
-    margin-top:10px;
-    color:#94869a;
-    font-family:Arial,sans-serif;
-    font-size:.85rem;
-}
-
-/* Buttons */
-
-.btn{
-    border:none;
-    border-radius:50px;
-    padding:16px 30px;
-    margin-top:28px;
-    font-family:Arial,sans-serif;
-    font-size:1rem;
-    font-weight:bold;
-    color:white;
-    cursor:pointer;
-    background:linear-gradient(90deg,#ec4899,#a855f7,#6366f1);
-    box-shadow:0 12px 30px rgba(139,92,246,.28);
-    transition:.25s;
-}
-
-.btn:hover{
-    transform:translateY(-3px);
-    box-shadow:0 17px 38px rgba(139,92,246,.35);
-}
-
-.btn:active{
-    transform:scale(.96);
-}
-
-.back{
-    background:rgba(255,255,255,.75);
-    color:#735f79;
-    box-shadow:none;
-    border:1px solid #eaddec;
-    margin-right:8px;
-}
-
-/* Step number */
-
-.step{
-    font-family:Arial,sans-serif;
-    font-size:.75rem;
-    letter-spacing:3px;
-    text-transform:uppercase;
-    color:#b079a9;
-    margin-bottom:16px;
-}
-
-/* Name */
-
-.title{
-    font-size:clamp(2rem,8vw,3.4rem);
-    line-height:1.15;
-    color:#49364e;
-}
-
-.input{
-    width:100%;
-    margin-top:28px;
-    padding:18px 20px;
-    border-radius:18px;
-    border:2px solid #eadfeb;
-    outline:none;
-    background:rgba(255,255,255,.85);
-    font-family:Arial,sans-serif;
-    font-size:1.05rem;
-    text-align:center;
-    color:#49364e;
-    transition:.25s;
-}
-
-.input:focus{
-    border-color:#c084fc;
-    box-shadow:0 0 0 5px rgba(192,132,252,.12);
-}
-
-/* Cake choices */
-
-.cakes{
     display:flex;
-    justify-content:center;
-    gap:14px;
-    margin-top:30px;
+    animation:screenIn .65s ease;
 }
 
-.cake{
-    width:105px;
-    height:125px;
-    border-radius:25px;
-    border:2px solid #eee1f0;
-    background:rgba(255,255,255,.78);
-    cursor:pointer;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    transition:.3s;
-}
-
-.cake:hover{
-    transform:translateY(-8px);
-}
-
-.cake.selected{
-    border-color:#bd7eea;
-    background:#fff6fd;
-    box-shadow:
-        0 12px 30px rgba(170,100,210,.2),
-        0 0 0 4px rgba(192,132,252,.08);
-    transform:translateY(-7px);
-}
-
-.cake-icon{
-    font-size:3rem;
-}
-
-.cake-name{
-    font-family:Arial,sans-serif;
-    font-size:.78rem;
-    margin-top:8px;
-    color:#76677b;
-}
-
-/* Wish */
-
-.wish-card{
-    position:relative;
-    padding:35px 22px;
-    border-radius:35px;
-    background:
-        linear-gradient(
-            145deg,
-            rgba(255,255,255,.94),
-            rgba(255,244,250,.9)
-        );
-    border:1px solid rgba(255,255,255,.9);
-    box-shadow:0 25px 70px rgba(100,65,120,.18);
-}
-
-.cake-large{
-    font-size:clamp(5rem,20vw,8rem);
-    animation:cakeFloat 2.5s ease-in-out infinite;
-}
-
-@keyframes cakeFloat{
-    0%,100%{transform:translateY(0);}
-    50%{transform:translateY(-12px);}
-}
-
-.candles{
-    font-size:1.7rem;
-    margin-top:-10px;
-    animation:flicker .7s infinite alternate;
-}
-
-@keyframes flicker{
-    from{transform:scale(1);}
-    to{transform:scale(1.08);}
-}
-
-.happy{
-    margin-top:15px;
-    font-size:clamp(1.9rem,8vw,3.2rem);
-    color:#ec4899;
-}
-
-.name{
-    color:#8b5cf6;
-}
-
-.message{
-    margin:18px auto 0;
-    max-width:560px;
-    color:#65566b;
-    font-size:clamp(1rem,4vw,1.2rem);
-    line-height:1.8;
-}
-
-/* Music */
-
-.music-circle{
-    width:120px;
-    height:120px;
-    margin:0 auto 25px;
-    border-radius:50%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:3.2rem;
-    background:rgba(255,255,255,.85);
-    box-shadow:0 15px 40px rgba(130,90,150,.15);
-    animation:musicPulse 2s infinite;
-}
-
-@keyframes musicPulse{
-    0%,100%{
-        transform:scale(1);
-        box-shadow:0 15px 40px rgba(130,90,150,.15);
-    }
-    50%{
-        transform:scale(1.05);
-        box-shadow:0 15px 55px rgba(236,72,153,.25);
-    }
-}
-
-/* Video */
-
-.video-frame{
-    padding:8px;
-    background:white;
-    border-radius:25px;
-    box-shadow:0 20px 55px rgba(90,60,100,.18);
-}
-
-video{
-    width:100%;
-    max-height:390px;
-    display:block;
-    border-radius:19px;
-    background:#eee;
-}
-
-/* Surprise */
-
-.surprise-box{
-    padding:40px 20px;
-    border-radius:35px;
-    background:rgba(255,255,255,.75);
-    box-shadow:0 20px 60px rgba(100,70,130,.14);
-}
-
-.gift{
-    font-size:6rem;
-    animation:giftBounce 1.5s infinite;
-}
-
-@keyframes giftBounce{
-    0%,100%{transform:translateY(0) rotate(0);}
-    50%{transform:translateY(-15px) rotate(4deg);}
-}
-
-.final-message{
-    display:none;
-    margin-top:25px;
-    padding:22px;
-    border-radius:20px;
-    background:#fff0f7;
-    line-height:1.8;
-    color:#684f61;
-}
-
-.final-message.show{
-    display:block;
-    animation:reveal .8s ease;
-}
-
-@keyframes reveal{
+@keyframes screenIn{
     from{
         opacity:0;
-        transform:scale(.8);
+        transform:scale(.96);
     }
     to{
         opacity:1;
@@ -392,117 +92,396 @@ video{
     }
 }
 
-/* Final */
-
-.final-title{
-    font-size:clamp(2.2rem,9vw,4rem);
-    color:#ec4899;
-    line-height:1.2;
+.content{
+    width:min(92%,700px);
+    max-height:94vh;
+    overflow:auto;
+    padding:25px;
 }
 
-.final-name{
-    color:#8b5cf6;
+/* ---------------- TEXT ---------------- */
+
+.small-title{
+    font-size:14px;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    opacity:.65;
+    margin-bottom:14px;
 }
 
-.final-buttons{
-    display:flex;
-    justify-content:center;
-    gap:10px;
-    flex-wrap:wrap;
+h1{
+    font-size:clamp(38px,8vw,78px);
+    line-height:1;
+    margin-bottom:18px;
 }
 
-.secondary{
+h2{
+    font-size:clamp(28px,6vw,52px);
+    margin-bottom:15px;
+}
+
+p{
+    font-size:18px;
+    line-height:1.6;
+}
+
+/* ---------------- BUTTONS ---------------- */
+
+.main-btn{
+    margin-top:28px;
+    padding:16px 30px;
+    border-radius:50px;
+    background:linear-gradient(135deg,#9b4dff,#ff5fa2);
+    color:white;
+    font-weight:bold;
+    font-size:17px;
+    box-shadow:0 12px 30px rgba(155,77,255,.3);
+    transition:.25s;
+}
+
+.main-btn:hover{
+    transform:translateY(-3px) scale(1.02);
+}
+
+.secondary-btn{
+    margin-top:15px;
+    padding:13px 24px;
+    border-radius:50px;
     background:white;
-    color:#5f4c65;
-    border:1px solid #eadfeb;
-    box-shadow:0 8px 20px rgba(100,70,130,.1);
+    color:#7437a7;
+    box-shadow:0 8px 20px rgba(80,30,100,.12);
 }
 
-/* Progress */
+/* ---------------- WELCOME ---------------- */
 
-.progress{
-    position:fixed;
-    top:18px;
-    left:50%;
-    transform:translateX(-50%);
-    width:min(280px,70%);
-    height:4px;
-    border-radius:10px;
-    background:rgba(255,255,255,.6);
-    z-index:50;
-    overflow:hidden;
+.welcome-icon{
+    font-size:90px;
+    animation:float 3s ease-in-out infinite;
+    margin-bottom:20px;
 }
 
-.progress-bar{
-    height:100%;
-    width:0%;
-    border-radius:10px;
-    background:linear-gradient(90deg,#ec4899,#8b5cf6);
-    transition:.6s;
+@keyframes float{
+    0%,100%{transform:translateY(0)}
+    50%{transform:translateY(-13px)}
 }
 
-/* Confetti */
-
-#confetti{
-    position:fixed;
+.stars{
+    position:absolute;
     inset:0;
     pointer-events:none;
-    z-index:100;
-    overflow:hidden;
 }
 
-.confetti-piece{
+.star{
     position:absolute;
-    top:-30px;
-    animation:fall 3.5s linear forwards;
+    animation:twinkle 2.5s infinite;
+    opacity:.7;
 }
 
-@keyframes fall{
-    0%{
-        transform:translateY(0) rotate(0);
-        opacity:1;
-    }
-    100%{
-        transform:translateY(110vh) rotate(720deg);
+@keyframes twinkle{
+    0%,100%{opacity:.2;transform:scale(.8)}
+    50%{opacity:1;transform:scale(1.3)}
+}
+
+/* ---------------- FORM ---------------- */
+
+.form-box{
+    margin:25px auto 0;
+    width:min(100%,500px);
+}
+
+.text-input,
+.message-input{
+    width:100%;
+    border:2px solid rgba(150,80,200,.15);
+    background:rgba(255,255,255,.85);
+    border-radius:22px;
+    padding:17px 20px;
+    outline:none;
+    color:#35164f;
+    box-shadow:0 8px 25px rgba(80,30,100,.08);
+}
+
+.text-input:focus,
+.message-input:focus{
+    border-color:#b45cff;
+}
+
+.message-input{
+    min-height:150px;
+    resize:none;
+}
+
+/* ---------------- PHOTO ---------------- */
+
+.photo-upload{
+    margin-top:20px;
+    padding:25px;
+    border:2px dashed rgba(140,70,190,.3);
+    border-radius:25px;
+    background:rgba(255,255,255,.55);
+}
+
+.photo-label{
+    display:inline-block;
+    padding:13px 22px;
+    border-radius:30px;
+    background:white;
+    color:#753ba3;
+    font-weight:bold;
+    cursor:pointer;
+    box-shadow:0 8px 20px rgba(80,30,100,.1);
+}
+
+#photoInput{
+    display:none;
+}
+
+.preview{
+    width:130px;
+    height:130px;
+    object-fit:cover;
+    border-radius:50%;
+    margin:20px auto 0;
+    display:none;
+    border:5px solid white;
+    box-shadow:0 10px 30px rgba(60,20,80,.2);
+}
+
+/* ---------------- CAKES ---------------- */
+
+.cakes{
+    display:flex;
+    justify-content:center;
+    gap:18px;
+    flex-wrap:wrap;
+    margin-top:28px;
+}
+
+.cake{
+    width:130px;
+    height:145px;
+    border-radius:25px;
+    background:rgba(255,255,255,.75);
+    box-shadow:0 10px 25px rgba(80,30,100,.1);
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    font-size:65px;
+    transition:.3s;
+    border:3px solid transparent;
+}
+
+.cake span{
+    font-size:14px;
+    margin-top:8px;
+    font-weight:bold;
+}
+
+.cake:hover{
+    transform:translateY(-8px) rotate(-2deg);
+}
+
+.cake.selected{
+    border-color:#b04dff;
+    background:white;
+    transform:translateY(-8px) scale(1.05);
+}
+
+/* ---------------- BALLOONS ---------------- */
+
+.balloon-area{
+    position:relative;
+    width:100%;
+    height:65vh;
+    min-height:430px;
+    margin-top:10px;
+    overflow:hidden;
+    border-radius:35px;
+    background:
+        linear-gradient(180deg,rgba(255,255,255,.35),rgba(255,255,255,.08));
+}
+
+.balloon{
+    position:absolute;
+    width:62px;
+    height:78px;
+    border-radius:50% 50% 45% 45%;
+    cursor:pointer;
+    box-shadow:
+        inset -9px -12px 15px rgba(0,0,0,.08),
+        0 8px 15px rgba(0,0,0,.12);
+    animation:balloonFloat var(--duration) ease-in-out infinite alternate;
+    transition:.2s;
+}
+
+.balloon::after{
+    content:"";
+    position:absolute;
+    left:50%;
+    top:76px;
+    width:1px;
+    height:110px;
+    background:rgba(60,40,80,.25);
+}
+
+.balloon::before{
+    content:"";
+    position:absolute;
+    bottom:-5px;
+    left:50%;
+    transform:translateX(-50%);
+    border-left:6px solid transparent;
+    border-right:6px solid transparent;
+    border-top:10px solid rgba(0,0,0,.15);
+}
+
+.balloon:hover{
+    transform:scale(1.08);
+}
+
+@keyframes balloonFloat{
+    from{transform:translateY(0) rotate(-4deg)}
+    to{transform:translateY(-30px) rotate(5deg)}
+}
+
+.balloon.pop{
+    animation:pop .35s forwards;
+}
+
+@keyframes pop{
+    0%{transform:scale(1)}
+    50%{transform:scale(1.4)}
+    100%{transform:scale(0);opacity:0}
+}
+
+.balloon-counter{
+    margin-top:15px;
+    font-size:18px;
+    font-weight:bold;
+}
+
+/* ---------------- PHOTO REVEAL ---------------- */
+
+.reveal-photo{
+    width:min(85vw,380px);
+    max-height:55vh;
+    object-fit:cover;
+    border-radius:30px;
+    border:7px solid white;
+    box-shadow:0 20px 60px rgba(70,20,90,.25);
+    animation:photoReveal 1s ease;
+}
+
+@keyframes photoReveal{
+    from{
         opacity:0;
+        transform:scale(.5) rotate(-8deg);
+    }
+    to{
+        opacity:1;
+        transform:scale(1) rotate(0);
     }
 }
 
-/* Mobile */
+/* ---------------- VIDEO ---------------- */
+
+.video-box{
+    margin:25px auto;
+    width:min(100%,700px);
+    border-radius:25px;
+    overflow:hidden;
+    background:#180c20;
+    box-shadow:0 20px 50px rgba(40,10,50,.3);
+}
+
+video{
+    width:100%;
+    max-height:60vh;
+    display:block;
+}
+
+/* ---------------- FINAL ---------------- */
+
+.final-card{
+    position:relative;
+    padding:35px 25px;
+    border-radius:35px;
+    background:rgba(255,255,255,.75);
+    box-shadow:0 20px 70px rgba(80,30,100,.15);
+    backdrop-filter:blur(10px);
+}
+
+.final-photo{
+    width:150px;
+    height:150px;
+    object-fit:cover;
+    border-radius:50%;
+    border:6px solid white;
+    box-shadow:0 10px 30px rgba(80,30,100,.2);
+    margin-bottom:20px;
+}
+
+.final-message{
+    margin:20px auto;
+    padding:20px;
+    border-radius:22px;
+    background:rgba(255,255,255,.8);
+    font-size:18px;
+    line-height:1.7;
+    max-width:560px;
+    white-space:pre-wrap;
+}
+
+/* ---------------- CONFETTI ---------------- */
+
+.confetti{
+    position:fixed;
+    width:10px;
+    height:18px;
+    top:-30px;
+    z-index:999;
+    animation:confettiFall linear forwards;
+    pointer-events:none;
+}
+
+@keyframes confettiFall{
+    to{
+        transform:
+            translateY(110vh)
+            rotate(720deg);
+    }
+}
+
+/* ---------------- RESPONSIVE ---------------- */
 
 @media(max-width:600px){
 
-    .screen{
-        padding:30px 16px;
-    }
-
-    .cakes{
-        gap:8px;
+    .content{
+        padding:18px;
     }
 
     .cake{
-        width:88px;
-        height:112px;
+        width:105px;
+        height:120px;
+        font-size:52px;
     }
 
-    .cake-icon{
-        font-size:2.5rem;
+    .balloon{
+        width:52px;
+        height:67px;
     }
 
-    .cake-name{
-        font-size:.7rem;
+    .balloon::after{
+        top:65px;
     }
 
-    .wish-card{
-        padding:28px 17px;
+    p{
+        font-size:16px;
     }
 
-    .final-buttons .btn{
+    .main-btn{
         width:100%;
-    }
-
-    .back{
-        margin-right:0;
     }
 }
 </style>
@@ -510,542 +489,199 @@ video{
 
 <body>
 
-<div class="decor d1">✨</div>
-<div class="decor d2">🎈</div>
-<div class="decor d3">🌸</div>
-<div class="decor d4">🎉</div>
-<div class="decor d5">💖</div>
+<div class="app">
 
-<div class="progress">
-    <div class="progress-bar" id="progressBar"></div>
-</div>
+<audio id="bgMusic" loop preload="auto">
+    <source src="birthday.mp3" type="audio/mpeg">
+</audio>
 
-<div id="confetti"></div>
+<button class="music-control" id="musicBtn" onclick="toggleMusic()">🔊</button>
 
-<div class="flow">
+<div class="stars" id="stars"></div>
 
 <!-- 1. WELCOME -->
+<section class="screen active" id="screenWelcome">
+    <div class="content">
 
-<section class="screen active" id="screen1">
-<div class="content">
+        <div class="welcome-icon">🎁</div>
 
-    <div class="logo">Wishcraft</div>
+        <div class="small-title">A little surprise awaits</div>
 
-    <p class="subtitle">
-        Turn a simple birthday wish into<br>
-        a beautiful little celebration. 💕
-    </p>
+        <h1>Something Special ✨</h1>
 
-    <p class="small">
-        ✨ Birthday wishes • cakes • music • surprises
-    </p>
+        <p>
+            Someone has prepared a little celebration.
+            <br>
+            Are you ready to discover it?
+        </p>
 
-    <button class="btn" onclick="nextScreen()">
-        Start the Magic ✨
-    </button>
+        <button class="main-btn" onclick="startExperience()">
+            Start the Surprise 💖
+        </button>
 
-</div>
+    </div>
 </section>
 
 
 <!-- 2. NAME -->
+<section class="screen" id="screenName">
+    <div class="content">
 
-<section class="screen" id="screen2">
-<div class="content">
+        <div class="small-title">Step 1</div>
 
-    <div class="step">Step 01 • Someone special</div>
+        <h2>Who is this surprise for? 💌</h2>
 
-    <h1 class="title">
-        Who is celebrating<br>today? 💌
-    </h1>
+        <p>Enter their special name.</p>
 
-    <p class="subtitle">
-        Let's make this wish personal.
-    </p>
+        <div class="form-box">
 
-    <input
-        class="input"
-        id="personName"
-        type="text"
-        maxlength="40"
-        placeholder="Enter their name..."
-    >
+            <input
+                id="nameInput"
+                class="text-input"
+                type="text"
+                maxlength="40"
+                placeholder="Enter their name..."
+            >
 
-    <button class="btn" onclick="saveName()">
-        Continue 💕
-    </button>
+            <button class="main-btn" onclick="saveName()">
+                Continue ✨
+            </button>
 
-</div>
-</section>
-
-
-<!-- 3. CAKE -->
-
-<section class="screen" id="screen3">
-<div class="content">
-
-    <div class="step">Step 02 • Pick a cake</div>
-
-    <h1 class="title">
-        Choose something<br>sweet 🎂
-    </h1>
-
-    <div class="cakes">
-
-        <div class="cake selected" onclick="selectCake(this,'🎂')">
-            <span class="cake-icon">🎂</span>
-            <span class="cake-name">Classic</span>
-        </div>
-
-        <div class="cake" onclick="selectCake(this,'🧁')">
-            <span class="cake-icon">🧁</span>
-            <span class="cake-name">Cupcake</span>
-        </div>
-
-        <div class="cake" onclick="selectCake(this,'🍰')">
-            <span class="cake-icon">🍰</span>
-            <span class="cake-name">Sweet</span>
         </div>
 
     </div>
-
-    <button class="btn" onclick="nextScreen()">
-        This One! 🎀
-    </button>
-
-</div>
 </section>
 
 
-<!-- 4. WISH -->
+<!-- 3. PHOTO -->
+<section class="screen" id="screenPhoto">
+    <div class="content">
 
-<section class="screen" id="screen4">
-<div class="content">
+        <div class="small-title">Step 2</div>
 
-    <div class="step">Step 03 • Your wish</div>
+        <h2>Add a special picture 📸</h2>
 
-    <div class="wish-card">
-
-        <div class="cake-large" id="cakeDisplay">🎂</div>
-
-        <div class="candles">🕯️ 🕯️ 🕯️</div>
-
-        <h1 class="happy">
-            Happy Birthday,<br>
-            <span class="name" id="nameDisplay"></span>! 🎉
-        </h1>
-
-        <p class="message">
-            May your special day be filled with happiness,
-            laughter, love and beautiful memories.
-            May the year ahead bring you wonderful
-            moments and countless reasons to smile. 💖
+        <p>
+            Choose the picture you want to reveal during the surprise.
         </p>
 
-    </div>
+        <div class="form-box">
 
-    <button class="btn" onclick="nextScreen()">
-        Continue the Surprise ✨
-    </button>
+            <div class="photo-upload">
 
-</div>
-</section>
+                <label class="photo-label" for="photoInput">
+                    Choose Picture 📷
+                </label>
 
+                <input
+                    id="photoInput"
+                    type="file"
+                    accept="image/*"
+                    onchange="loadPhoto(event)"
+                >
 
-<!-- 5. MUSIC -->
+                <img id="photoPreview" class="preview">
 
-<section class="screen" id="screen5">
-<div class="content">
+            </div>
 
-    <div class="step">Step 04 • Set the mood</div>
+            <button class="main-btn" onclick="continueFromPhoto()">
+                Continue 🎂
+            </button>
 
-    <div class="music-circle">🎵</div>
-
-    <h1 class="title">
-        A little music<br>for the celebration
-    </h1>
-
-    <p class="subtitle">
-        Tap play and let the birthday mood begin. 💕
-    </p>
-
-    <audio id="music" loop>
-        <source src="birthday.mp3" type="audio/mpeg">
-    </audio>
-
-    <button class="btn" id="musicBtn" onclick="toggleMusic()">
-        🎵 Play Birthday Music
-    </button>
-
-    <br>
-
-    <button class="btn secondary" onclick="nextScreen()">
-        Continue →
-    </button>
-
-</div>
-</section>
-
-
-<!-- 6. VIDEO -->
-
-<section class="screen" id="screen6">
-<div class="content">
-
-    <div class="step">Step 05 • A little memory</div>
-
-    <h1 class="title">
-        There's a little<br>surprise waiting... 🎬
-    </h1>
-
-    <div class="video-frame" style="margin-top:25px;">
-
-        <video controls playsinline>
-            <source src="birthday-video.mp4" type="video/mp4">
-            Your browser does not support video.
-        </video>
-
-    </div>
-
-    <p class="small">
-        Add your own <b>birthday-video.mp4</b> to GitHub.
-    </p>
-
-    <button class="btn" onclick="nextScreen()">
-        What's Next? 🎁
-    </button>
-
-</div>
-</section>
-
-
-<!-- 7. SURPRISE -->
-
-<section class="screen" id="screen7">
-<div class="content">
-
-    <div class="surprise-box">
-
-        <div class="gift">🎁</div>
-
-        <h1 class="title">
-            One last surprise<br>for you...
-        </h1>
-
-        <button class="btn" onclick="openGift()">
-            Open the Gift ✨
-        </button>
-
-        <div class="final-message" id="finalMessage">
-            <b>To <span id="giftName"></span> 💖</b>
-            <br><br>
-            Never forget how special you are.
-            May your life be filled with beautiful
-            people, unforgettable moments,
-            happiness and dreams that come true.
-            <br><br>
-            Keep smiling, keep shining,
-            and have the happiest birthday ever! 🎂✨
         </div>
 
     </div>
-
-    <button
-        class="btn"
-        id="afterGift"
-        style="display:none;"
-        onclick="nextScreen()">
-        Finish the Celebration 🎉
-    </button>
-
-</div>
 </section>
 
 
-<!-- 8. FINAL -->
+<!-- 4. CAKE -->
+<section class="screen" id="screenCake">
+    <div class="content">
 
-<section class="screen" id="screen8">
-<div class="content">
+        <div class="small-title">Step 3</div>
 
-    <div class="logo" style="font-size:clamp(2.4rem,10vw,4.5rem);">
-        Wishcraft ✨
-    </div>
+        <h2>Choose their cake 🎂</h2>
 
-    <h1 class="final-title">
-        Your wish for<br>
-        <span class="final-name" id="finalName"></span><br>
-        is ready! 💖
-    </h1>
+        <p>Pick the cake for the celebration.</p>
 
-    <p class="subtitle">
-        Now send a little piece of happiness their way. 🎁
-    </p>
+        <div class="cakes">
 
-    <div class="final-buttons">
+            <button class="cake" onclick="selectCake(this,'🎂')">
+                🎂
+                <span>Classic</span>
+            </button>
 
-        <button class="btn" onclick="shareWish()">
-            🔗 Share the Wish
+            <button class="cake" onclick="selectCake(this,'🧁')">
+                🧁
+                <span>Cupcake</span>
+            </button>
+
+            <button class="cake" onclick="selectCake(this,'🍰')">
+                🍰
+                <span>Sweet</span>
+            </button>
+
+        </div>
+
+        <button class="main-btn" onclick="continueFromCake()">
+            Let's Celebrate 🎉
         </button>
 
-        <button class="btn secondary" onclick="restart()">
-            💌 Create Another
-        </button>
-
     </div>
-
-    <p class="small">
-        Made with 💖 by Wishcraft Designs
-    </p>
-
-</div>
 </section>
 
-</div>
 
+<!-- 5. BALLOONS -->
+<section class="screen" id="screenBalloons">
+    <div class="content">
 
-<script>
+        <div class="small-title">A little game</div>
 
-let currentScreen = 1;
-const totalScreens = 8;
+        <h2>Pop the balloons! 🎈</h2>
 
-let personName = "";
-let selectedCake = "🎂";
+        <p>
+            Pop <strong>8 balloons</strong> to unlock the surprise.
+        </p>
 
-const screens =
-    document.querySelectorAll(".screen");
+        <div class="balloon-area" id="balloonArea"></div>
 
-function showScreen(number){
+        <div class="balloon-counter">
+            Popped: <span id="balloonCount">0</span> / 8
+        </div>
 
-    screens.forEach((screen,index)=>{
+    </div>
+</section>
 
-        screen.classList.remove("active","previous");
 
-        if(index + 1 === number){
-            screen.classList.add("active");
-        }
+<!-- 6. PHOTO REVEAL -->
+<section class="screen" id="screenReveal">
+    <div class="content">
 
-        if(index + 1 < number){
-            screen.classList.add("previous");
-        }
+        <div class="small-title">You found it! ✨</div>
 
-    });
+        <h2 id="revealTitle">A special memory 💖</h2>
 
-    currentScreen = number;
+        <img id="revealPhoto" class="reveal-photo">
 
-    document.getElementById("progressBar").style.width =
-        ((number - 1) / (totalScreens - 1) * 100) + "%";
-}
+        <p style="margin-top:20px;">
+            This moment was saved just for you.
+        </p>
 
-function nextScreen(){
+        <button class="main-btn" onclick="goToMessage()">
+            Write Something 💌
+        </button>
 
-    if(currentScreen < totalScreens){
+    </div>
+</section>
 
-        showScreen(currentScreen + 1);
 
-    }
-}
+<!-- 7. MESSAGE -->
+<section class="screen" id="screenMessage">
+    <div class="content">
 
-function saveName(){
+        <div class="small-title">Something from the heart</div>
 
-    const input =
-        document.getElementById("personName");
+        <h2>Write your own thoughts 💖</h2>
 
-    const value =
-        input.value.trim();
-
-    if(!value){
-
-        alert("Please enter their name 💖");
-        input.focus();
-        return;
-
-    }
-
-    personName = value;
-
-    document.getElementById("nameDisplay").textContent =
-        personName;
-
-    document.getElementById("giftName").textContent =
-        personName;
-
-    document.getElementById("finalName").textContent =
-        personName;
-
-    nextScreen();
-
-    createConfetti();
-}
-
-function selectCake(element,cake){
-
-    document.querySelectorAll(".cake")
-        .forEach(item=>{
-            item.classList.remove("selected");
-        });
-
-    element.classList.add("selected");
-
-    selectedCake = cake;
-
-    document.getElementById("cakeDisplay")
-        .textContent = cake;
-}
-
-function toggleMusic(){
-
-    const music =
-        document.getElementById("music");
-
-    const button =
-        document.getElementById("musicBtn");
-
-    if(music.paused){
-
-        music.play()
-        .then(()=>{
-
-            button.textContent =
-                "🔇 Turn Music Off";
-
-        })
-        .catch(()=>{
-
-            alert(
-                "Please upload a file named birthday.mp3 to your GitHub repository first."
-            );
-
-        });
-
-    }else{
-
-        music.pause();
-
-        button.textContent =
-            "🎵 Play Birthday Music";
-    }
-}
-
-function openGift(){
-
-    const message =
-        document.getElementById("finalMessage");
-
-    message.classList.add("show");
-
-    document.getElementById("afterGift")
-        .style.display = "inline-block";
-
-    createConfetti();
-
-}
-
-function createConfetti(){
-
-    const container =
-        document.getElementById("confetti");
-
-    container.innerHTML = "";
-
-    const symbols =
-        ["🎉","🎊","✨","💖","🌸","⭐","🎈","💕"];
-
-    for(let i=0;i<55;i++){
-
-        const piece =
-            document.createElement("span");
-
-        piece.className =
-            "confetti-piece";
-
-        piece.textContent =
-            symbols[
-                Math.floor(
-                    Math.random()*symbols.length
-                )
-            ];
-
-        piece.style.left =
-            Math.random()*100 + "vw";
-
-        piece.style.animationDelay =
-            Math.random()*1.5 + "s";
-
-        piece.style.fontSize =
-            (12 + Math.random()*18) + "px";
-
-        container.appendChild(piece);
-    }
-
-    setTimeout(()=>{
-        container.innerHTML = "";
-    },5000);
-}
-
-async function shareWish(){
-
-    const text =
-        "🎂 I made a beautiful birthday surprise for " +
-        (personName || "you") +
-        " with Wishcraft Designs! ✨";
-
-    if(navigator.share){
-
-        try{
-
-            await navigator.share({
-                title:"Wishcraft Birthday Surprise ✨",
-                text:text,
-                url:window.location.href
-            });
-
-        }catch(error){}
-
-    }else{
-
-        try{
-
-            await navigator.clipboard.writeText(
-                window.location.href
-            );
-
-            alert(
-                "Wishcraft link copied! 🎉 Send it to them!"
-            );
-
-        }catch(error){
-
-            alert(
-                "Your Wishcraft link is:\n\n" +
-                window.location.href
-            );
-
-        }
-    }
-}
-
-function restart(){
-
-    const music =
-        document.getElementById("music");
-
-    music.pause();
-    music.currentTime = 0;
-
-    document.getElementById("musicBtn")
-        .textContent = "🎵 Play Birthday Music";
-
-    document.getElementById("personName")
-        .value = "";
-
-    personName = "";
-
-    showScreen(1);
-}
-
-showScreen(1);
-
-</script>
-
-</body>
-            </html>
+        <p>
+            There is no ready-made wish here.
